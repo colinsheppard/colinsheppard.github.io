@@ -23,6 +23,8 @@ function Ai() {
         //              This changes the state of the grid object, so you should probably copy() the grid before using this.
         //              Naturally the modified state doesn't contain information about new tiles.
         //              Method returns true if you can move to that direction, false otherwise.
+	
+	alert(grid.cells[0][0]);
 
         // sample AI:
         if (this.foo == null) this.foo = 0;
