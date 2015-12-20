@@ -24,7 +24,7 @@ function Ai() {
         //              Naturally the modified state doesn't contain information about new tiles.
         //              Method returns true if you can move to that direction, false otherwise.
 	
-	alert(((grid.cells[0][0]==null)?"empty":grid.cells[0][0].value));
+      /*alert(((grid.cells[0][0]==null)?"empty":grid.cells[0][0].value));*/
 
         // sample AI:
         if (this.foo == null) this.foo = 0;
