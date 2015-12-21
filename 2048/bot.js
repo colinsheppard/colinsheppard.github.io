@@ -47,7 +47,7 @@ function Ai() {
 	  }
 	}
 
-	console.log("best score: "+score+" move:"+bestMove);
+	console.log("best score: "+bestScore+" move:"+bestMove);
         return bestMove;
     }
     this.scoreMove = function(move,grid,depth){
