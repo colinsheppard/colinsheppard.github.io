@@ -54,7 +54,9 @@ function Ai() {
       if(validMove && depth<6){
 	for(i = 0; i < 4; i++){ 
 	  var newscore = this.scoreMove(i,newgrid,depth+1);
-	  if(newscore>score)score = newscore;
+	  if(newscore>score){
+	    score = newscore;
+	  }
 	}
       }
       console.log("move: "+move+" depth: "+depth+" score: "+score);
@@ -69,5 +71,6 @@ function Ai() {
 	  }
 	}
       }
+      return score;
     }
 }
