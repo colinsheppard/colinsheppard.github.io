@@ -26,6 +26,7 @@ function Ai() {
 	
 	var bestScore = this.getScore(grid);
 	var bestMove = -1;
+	var i;
 	for(i = 0; i < 4; i++){ 
 	  var newscore = this.scoreMove(i,grid,1);
 	  if(newscore>bestScore){
@@ -54,6 +55,7 @@ function Ai() {
       var newgrid = grid.copy();
       var validMove = newgrid.move(move);
       var score = this.getScore(newgrid);
+      var i;
       if(validMove && depth<6){
 	for(i = 0; i < 4; i++){ 
 	  var newscore = this.scoreMove(i,newgrid,depth+1);
@@ -67,6 +69,8 @@ function Ai() {
     }
     this.getScore = function(grid){
       var score = 0;
+      var i;
+      var j;
       for(i = 0; i<4; i++){
 	for(j = 0; j<4; j++){
 	  if(grid.cells[i][j]!=null){
