@@ -24,7 +24,7 @@ function Ai() {
         //              Naturally the modified state doesn't contain information about new tiles.
         //              Method returns true if you can move to that direction, false otherwise.
 	
-	var bestScore = this.getScore(grid);
+	var bestScore = this.getScore(grid,1);
 	var bestMove = -1;
 	var i;
 	for(i = 0; i < 4; i++){ 
@@ -54,7 +54,7 @@ function Ai() {
     this.scoreMove = function(move,grid,depth){
       var newgrid = grid.copy();
       var validMove = newgrid.move(move);
-      var score = this.getScore(newgrid);
+      var score = this.getScore(newgrid,depth);
       var i;
       if(validMove && depth<5){
 	for(i = 0; i < 4; i++){ 
@@ -67,7 +67,7 @@ function Ai() {
       console.log("move: "+move+" valid? "+validMove+" depth: "+depth+" score: "+score);
       return score;
     }
-    this.getScore = function(grid){
+    this.getScore = function(grid,depth){
       var score = 0;
       var i;
       var j;
@@ -76,19 +76,19 @@ function Ai() {
 	  if(grid.cells[i][j]!=null){
 	    var exp = 1.05;
 	    if(i<3){
-	      var newExp = this.getExp(grid.cells[i][j],grid.cells[i+1][j]);
+	      var newExp = this.getExp(grid.cells[i][j],grid.cells[i+1][j],depth);
 	      exp = (newExp > exp) ? newExp : exp;
 	    }
 	    if(i>0){
-	      var newExp = this.getExp(grid.cells[i][j],grid.cells[i-1][j]);
+	      var newExp = this.getExp(grid.cells[i][j],grid.cells[i-1][j],depth);
 	      exp = (newExp > exp) ? newExp : exp;
 	    }
 	    if(j<3){
-	      var newExp = this.getExp(grid.cells[i][j],grid.cells[i][j+1]);
+	      var newExp = this.getExp(grid.cells[i][j],grid.cells[i][j+1],depth);
 	      exp = (newExp > exp) ? newExp : exp;
 	    }
 	    if(j>0){
-	      var newExp = this.getExp(grid.cells[i][j],grid.cells[i][j-1]);
+	      var newExp = this.getExp(grid.cells[i][j],grid.cells[i][j-1],depth);
 	      exp = (newExp > exp) ? newExp : exp;
 	    }
 	    score += Math.round(Math.pow(grid.cells[i][j].value,exp));
@@ -98,14 +98,14 @@ function Ai() {
       return score;
     }
     this.getExp = function(cell1,cell2){
-	var exp = 1.05;
+	var exp = 1.05 - depth/100;
 	if(cell2!=null){
 	  if(Math.round(cell1.value / 4)  == cell2.value){
-	    exp = 1.075;
+	    exp = 1.075 - depth/100;
 	  }else if(Math.round(cell1.value / 2) == cell2.value){
-	    exp = 1.1;
+	    exp = 1.1 - depth/100;
 	  }else if(cell1.value == cell2.value){
-	    exp = 1.15;
+	    exp = 1.15 - depth/100;
 	  }
 	}
 	return exp;
