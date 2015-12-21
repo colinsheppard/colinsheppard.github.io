@@ -72,6 +72,7 @@ function Ai() {
       var i;
       var j;
       var numEmpty = 0;
+      var maxCell = grid.cells[0][0];
       for(i = 0; i<4; i++){
 	for(j = 0; j<4; j++){
 	  if(grid.cells[i][j]!=null){
@@ -93,12 +94,17 @@ function Ai() {
 	      exp = (newExp > exp) ? newExp : exp;
 	    }
 	    score += Math.round(Math.pow(grid.cells[i][j].value,exp));
+	    if(grid.cells[i][j].value > maxCell.value)maxCell = grid.cells[i][j];
 	  }else{
 	    numEmpty++;
 	  }
 	}
       }
-      return Math.round(Math.pow(score,1+numEmpty/100));
+      var bonus = numEmpty/100;
+      if(maxCell.x + maxCell.y == 0 || maxCell.x + maxCell.y == 6 || (maxCell.x + maxCell.y == 3 && (maxCell.x == 0 || maxCell.y == 0))){
+	bonus += 0.1;
+      }
+      return Math.round(Math.pow(score,1 + bonus));
     }
     this.getExp = function(cell1,cell2,depth){
 	var exp = 1.1;
