@@ -75,14 +75,22 @@ function Ai() {
 	for(j = 0; j<4; j++){
 	  if(grid.cells[i][j]!=null){
 	    var exp = 1.05;
-	    var newExp = this.getExp(grid.cells[i][j],grid.cells[i+1][j]);
-	    exp = (newExp > exp) ? newExp : exp;
-	    var newExp = this.getExp(grid.cells[i][j],grid.cells[i-1][j]);
-	    exp = (newExp > exp) ? newExp : exp;
-	    var newExp = this.getExp(grid.cells[i][j],grid.cells[i][j+1]);
-	    exp = (newExp > exp) ? newExp : exp;
-	    var newExp = this.getExp(grid.cells[i][j],grid.cells[i][j-1]);
-	    exp = (newExp > exp) ? newExp : exp;
+	    if(i<3){
+	      var newExp = this.getExp(grid.cells[i][j],grid.cells[i+1][j]);
+	      exp = (newExp > exp) ? newExp : exp;
+	    }
+	    if(i>0){
+	      var newExp = this.getExp(grid.cells[i][j],grid.cells[i-1][j]);
+	      exp = (newExp > exp) ? newExp : exp;
+	    }
+	    if(j<3){
+	      var newExp = this.getExp(grid.cells[i][j],grid.cells[i][j+1]);
+	      exp = (newExp > exp) ? newExp : exp;
+	    }
+	    if(j>0){
+	      var newExp = this.getExp(grid.cells[i][j],grid.cells[i][j-1]);
+	      exp = (newExp > exp) ? newExp : exp;
+	    }
 	    score += Math.round(Math.pow(grid.cells[i][j].value,exp));
 	  }
 	}
