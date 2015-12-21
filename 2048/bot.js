@@ -36,6 +36,8 @@ function Ai() {
 
 	// If nothing improves score, just pick any valid move
 	if(bestMove == -1){
+	  console.log("finding valid move");
+	  bestMove = 0;
 	  for(i = 0; i < 4; i++){ 
 	    var newgrid = grid.copy();
 	    var validMove = newgrid.move(i);
