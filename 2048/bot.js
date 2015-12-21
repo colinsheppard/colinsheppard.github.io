@@ -26,21 +26,24 @@ function Ai() {
 	
       /*alert(((grid.cells[0][0]==null)?"empty":grid.cells[0][0].value));*/
 	var score = getScore(grid);
-	var bestMove = -1;
+	var bestMove = 0;
 	for(i = 0; i < 4; i++){ 
 	  var newscore = this.scoreMove(i,newgrid,depth+1);
-	  if(newscore>score){score = newscore;
-
+	  if(newscore>score){
+	    score = newscore;
+	    bestMove = i;
+	  }
+	}
 
         // sample AI:
-        if (this.foo == null) this.foo = 0;
         return this.foo++ % 4;
     }
     this.scoreMove(move,grid,depth){
+      console.log("move: "+move+" depth: "+depth);
       var newgrid = grid.copy();
-      newgrid.move(move);
+      var validMove = newgrid.move(move);
       var score = this.getScore(newgrid);
-      if(depth<6){
+      if(validMove && depth<6){
 	for(i = 0; i < 4; i++){ 
 	  var newscore = this.scoreMove(i,newgrid,depth+1);
 	  if(newscore>score)score = newscore;
