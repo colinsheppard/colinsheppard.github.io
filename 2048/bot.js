@@ -118,6 +118,6 @@ function Ai() {
 	    exp = 1.3;
 	  }
 	}
-	return exp - 2.5*depth/100;
+	return exp - 3*depth/100;
     }
 }
