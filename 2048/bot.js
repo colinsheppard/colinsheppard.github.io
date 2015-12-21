@@ -48,7 +48,7 @@ function Ai() {
 	  }
 	}
 
-	console.log("best score: "+bestScore+" move:"+bestMove);
+	/*console.log("best score: "+bestScore+" move:"+bestMove);*/
         return bestMove;
     }
     this.scoreMove = function(move,grid,depth){
@@ -56,7 +56,7 @@ function Ai() {
       var validMove = newgrid.move(move);
       var score = this.getScore(newgrid);
       var i;
-      if(validMove && depth<6){
+      if(validMove && depth<5){
 	for(i = 0; i < 4; i++){ 
 	  var newscore = this.scoreMove(i,newgrid,depth+1);
 	  if(newscore>score){
@@ -74,10 +74,32 @@ function Ai() {
       for(i = 0; i<4; i++){
 	for(j = 0; j<4; j++){
 	  if(grid.cells[i][j]!=null){
-	    score += Math.round(Math.pow(grid.cells[i][j].value,1.25));
+	    var exp = 1.05;
+	    var newExp = this.getExp(grid.cells[i][j],grid.cells[i+1][j]);
+	    exp = (newExp > exp) ? newExp : exp;
+	    var newExp = this.getExp(grid.cells[i][j],grid.cells[i-1][j]);
+	    exp = (newExp > exp) ? newExp : exp;
+	    var newExp = this.getExp(grid.cells[i][j],grid.cells[i][j+1]);
+	    exp = (newExp > exp) ? newExp : exp;
+	    var newExp = this.getExp(grid.cells[i][j],grid.cells[i][j-1]);
+	    exp = (newExp > exp) ? newExp : exp;
+	    score += Math.round(Math.pow(grid.cells[i][j].value,exp));
 	  }
 	}
       }
       return score;
+    }
+    this.getExp = function(cell1,cell2){
+	var exp = 1.05;
+	if(cell2!=null){
+	  if(cell2.value / 4  == cell1.value){
+	    exp = 1.075;
+	  }else if(cell2.value / 2 == cell1.value){
+	    exp = 1.1;
+	  }else if(cell2.value == cell1.value){
+	    exp = 1.15;
+	  }
+	}
+	return exp;
     }
 }
