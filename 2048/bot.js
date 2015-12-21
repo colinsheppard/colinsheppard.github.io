@@ -100,9 +100,9 @@ function Ai() {
     this.getExp = function(cell1,cell2){
 	var exp = 1.05;
 	if(cell2!=null){
-	  if(cell2.value / 4  == cell1.value){
+	  if(Math.round(cell2.value / 4)  == cell1.value){
 	    exp = 1.075;
-	  }else if(cell2.value / 2 == cell1.value){
+	  }else if(Math.round(cell2.value / 2) == cell1.value){
 	    exp = 1.1;
 	  }else if(cell2.value == cell1.value){
 	    exp = 1.15;
