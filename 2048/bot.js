@@ -101,11 +101,11 @@ function Ai() {
 	  }
 	}
       }
-      var expBonus = numEmpty/100;
+      var expBonus = numEmpty/150;
       if(maxCell.x + maxCell.y == 0 || maxCell.x + maxCell.y == 6 || (maxCell.x + maxCell.y == 3 && (maxCell.x == 0 || maxCell.y == 0))){
 	expBonus += 0.2;
       }
-      return Math.round(Math.pow(score,1 + expBonus - 3*depth/100));
+      return Math.round(Math.pow(score,1 + expBonus - 2*depth/100));
     }
     this.getNeighborBonus = function(cell1,cell2,depth){
 	var bonus = 1.1;
@@ -118,19 +118,6 @@ function Ai() {
 	    bonus = 1.3;
 	  }
 	}
-	return bonus - 3*depth/100;
-    }
-    this.getExp = function(cell1,cell2,depth){
-	var exp = 1.1;
-	if(cell2!=null){
-	  if(Math.round(cell1.value / 4)  == cell2.value){
-	    exp = 1.15;
-	  }else if(Math.round(cell1.value / 2) == cell2.value){
-	    exp = 1.2;
-	  }else if(cell1.value == cell2.value){
-	    exp = 1.3;
-	  }
-	}
-	return exp - 3*depth/100;
+	return bonus - 2*depth/100;
     }
 }
