@@ -75,7 +75,7 @@ function Ai() {
       for(i = 0; i<4; i++){
 	for(j = 0; j<4; j++){
 	  if(grid.cells[i][j]!=null){
-	    var exp = 1.05;
+	    var exp = 1.1;
 	    if(i<3){
 	      var newExp = this.getExp(grid.cells[i][j],grid.cells[i+1][j],depth);
 	      exp = (newExp > exp) ? newExp : exp;
@@ -101,14 +101,14 @@ function Ai() {
       return Math.round(Math.pow(score,1+numEmpty/100));
     }
     this.getExp = function(cell1,cell2,depth){
-	var exp = 1.05 - depth/100;
+	var exp = 1.1 - 2*depth/100;
 	if(cell2!=null){
 	  if(Math.round(cell1.value / 4)  == cell2.value){
-	    exp = 1.075 - depth/100;
-	  }else if(Math.round(cell1.value / 2) == cell2.value){
-	    exp = 1.1 - depth/100;
-	  }else if(cell1.value == cell2.value){
 	    exp = 1.15 - depth/100;
+	  }else if(Math.round(cell1.value / 2) == cell2.value){
+	    exp = 1.2 - depth/100;
+	  }else if(cell1.value == cell2.value){
+	    exp = 1.3 - depth/100;
 	  }
 	}
 	return exp;
