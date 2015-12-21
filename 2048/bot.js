@@ -25,9 +25,37 @@ function Ai() {
         //              Method returns true if you can move to that direction, false otherwise.
 	
       /*alert(((grid.cells[0][0]==null)?"empty":grid.cells[0][0].value));*/
+	var score = getScore(grid);
+	var bestMove = -1;
+	for(i = 0; i < 4; i++){ 
+	  var newscore = this.scoreMove(i,newgrid,depth+1);
+	  if(newscore>score){score = newscore;
+
 
         // sample AI:
         if (this.foo == null) this.foo = 0;
         return this.foo++ % 4;
+    }
+    this.scoreMove(move,grid,depth){
+      var newgrid = grid.copy();
+      newgrid.move(move);
+      var score = this.getScore(newgrid);
+      if(depth<6){
+	for(i = 0; i < 4; i++){ 
+	  var newscore = this.scoreMove(i,newgrid,depth+1);
+	  if(newscore>score)score = newscore;
+	}
+      }
+      return score;
+    }
+    this.getScore(grid){
+      var score = 0;
+      for(i = 0; i<4; i++){
+	for(j = 0; j<4; j++){
+	  if(grid.cells[i][j]!=null){
+	    score += Math.round(Math.pow(grid.cells[i][j],1.25));
+	  }
+	}
+      }
     }
 }
