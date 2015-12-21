@@ -97,7 +97,7 @@ function Ai() {
 	    var expBonus = 1;
 	    if(i==0 || i== 3)expBonus += 0.1;
 	    if(j==0 || j== 3)expBonus += 0.1;
-	    score += Math.round(Math.pow(grid.cells[i][j].value*bonus,expBonus - 2*depth/100));
+	    score += Math.round(Math.pow(grid.cells[i][j].value*bonus,expBonus));
 	    if(maxCell==null)maxCell = grid.cells[i][j];
 	    if(grid.cells[i][j].value > maxCell.value)maxCell = grid.cells[i][j];
 	  }else{
@@ -109,7 +109,7 @@ function Ai() {
       /*if(maxCell.x + maxCell.y == 0 || maxCell.x + maxCell.y == 6 || (maxCell.x + maxCell.y == 3 && (maxCell.x == 0 || maxCell.y == 0))){*/
       /*expBonus += 0.2;*/
       /*}*/
-      return Math.round(Math.pow(score,1.1 + numEmpty/50));
+      return Math.round(Math.pow(score,1.1 + numEmpty/30 - depth/100));
     }
     this.getNeighborBonus = function(cell1,cell2,depth){
 	var bonus = 1.4;
