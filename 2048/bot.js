@@ -103,7 +103,7 @@ function Ai() {
       }
       var bonus = numEmpty/100;
       if(maxCell.x + maxCell.y == 0 || maxCell.x + maxCell.y == 6 || (maxCell.x + maxCell.y == 3 && (maxCell.x == 0 || maxCell.y == 0))){
-	bonus += 0.1;
+	bonus += 0.2;
       }
       return Math.round(Math.pow(score,1 + bonus));
     }
@@ -118,6 +118,6 @@ function Ai() {
 	    exp = 1.3;
 	  }
 	}
-	return exp - 2*depth/100;
+	return exp - 2.5*depth/100;
     }
 }
