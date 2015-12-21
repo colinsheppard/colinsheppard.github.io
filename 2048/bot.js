@@ -38,7 +38,7 @@ function Ai() {
         // sample AI:
         return this.foo++ % 4;
     }
-    this.scoreMove(move,grid,depth){
+    this.scoreMove = function(move,grid,depth){
       console.log("move: "+move+" depth: "+depth);
       var newgrid = grid.copy();
       var validMove = newgrid.move(move);
@@ -51,7 +51,7 @@ function Ai() {
       }
       return score;
     }
-    this.getScore(grid){
+    this.getScore = function(grid){
       var score = 0;
       for(i = 0; i<4; i++){
 	for(j = 0; j<4; j++){
