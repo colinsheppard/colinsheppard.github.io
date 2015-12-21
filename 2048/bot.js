@@ -97,7 +97,7 @@ function Ai() {
       }
       return score;
     }
-    this.getExp = function(cell1,cell2){
+    this.getExp = function(cell1,cell2,depth){
 	var exp = 1.05 - depth/100;
 	if(cell2!=null){
 	  if(Math.round(cell1.value / 4)  == cell2.value){
