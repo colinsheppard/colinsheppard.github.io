@@ -76,24 +76,24 @@ function Ai() {
       for(i = 0; i<4; i++){
 	for(j = 0; j<4; j++){
 	  if(grid.cells[i][j]!=null){
-	    var exp = 1.1;
+	    var bonus = 1.1;
 	    if(i<3){
-	      var newExp = this.getExp(grid.cells[i][j],grid.cells[i+1][j],depth);
-	      exp = (newExp > exp) ? newExp : exp;
+	      var newbonus = this.getNeighborBonus(grid.cells[i][j],grid.cells[i+1][j],depth);
+	      bonus = (newbonus > bonus) ? newbonus : bonus;
 	    }
 	    if(i>0){
-	      var newExp = this.getExp(grid.cells[i][j],grid.cells[i-1][j],depth);
-	      exp = (newExp > exp) ? newExp : exp;
+	      var newbonus = this.getNeighborBonus(grid.cells[i][j],grid.cells[i-1][j],depth);
+	      bonus = (newbonus > bonus) ? newbonus : bonus;
 	    }
 	    if(j<3){
-	      var newExp = this.getExp(grid.cells[i][j],grid.cells[i][j+1],depth);
-	      exp = (newExp > exp) ? newExp : exp;
+	      var newbonus = this.getNeighborBonus(grid.cells[i][j],grid.cells[i][j+1],depth);
+	      bonus = (newbonus > bonus) ? newbonus : bonus;
 	    }
 	    if(j>0){
-	      var newExp = this.getExp(grid.cells[i][j],grid.cells[i][j-1],depth);
-	      exp = (newExp > exp) ? newExp : exp;
+	      var newbonus = this.getNeighborBonus(grid.cells[i][j],grid.cells[i][j-1],depth);
+	      bonus = (newbonus > bonus) ? newbonus : bonus;
 	    }
-	    score += Math.round(Math.pow(grid.cells[i][j].value,exp));
+	    score += grid.cells[i][j].value*bonus;
 	    if(maxCell==null)maxCell = grid.cells[i][j];
 	    if(grid.cells[i][j].value > maxCell.value)maxCell = grid.cells[i][j];
 	  }else{
@@ -101,11 +101,24 @@ function Ai() {
 	  }
 	}
       }
-      var bonus = numEmpty/100;
+      var expBonus = numEmpty/100;
       if(maxCell.x + maxCell.y == 0 || maxCell.x + maxCell.y == 6 || (maxCell.x + maxCell.y == 3 && (maxCell.x == 0 || maxCell.y == 0))){
-	bonus += 0.2;
+	expBonus += 0.2;
       }
-      return Math.round(Math.pow(score,1 + bonus));
+      return Math.round(Math.pow(score,1 + expBonus - 3*depth/100));
+    }
+    this.getNeighborBonus = function(cell1,cell2,depth){
+	var bonus = 1.1;
+	if(cell2!=null){
+	  if(Math.round(cell1.value / 4)  == cell2.value){
+	    bonus = 1.15;
+	  }else if(Math.round(cell1.value / 2) == cell2.value){
+	    bonus = 1.2;
+	  }else if(cell1.value == cell2.value){
+	    bonus = 1.3;
+	  }
+	}
+	return bonus - 3*depth/100;
     }
     this.getExp = function(cell1,cell2,depth){
 	var exp = 1.1;
