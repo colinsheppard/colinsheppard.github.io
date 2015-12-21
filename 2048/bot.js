@@ -24,12 +24,12 @@ function Ai() {
         //              Naturally the modified state doesn't contain information about new tiles.
         //              Method returns true if you can move to that direction, false otherwise.
 	
-	var score = this.getScore(grid);
+	var bestScore = this.getScore(grid);
 	var bestMove = -1;
 	for(i = 0; i < 4; i++){ 
 	  var newscore = this.scoreMove(i,grid,1);
-	  if(newscore>score){
-	    score = newscore;
+	  if(newscore>bestScore){
+	    bestScore = newscore;
 	    bestMove = i;
 	  }
 	}
@@ -47,6 +47,7 @@ function Ai() {
 	  }
 	}
 
+	console.log("best score: "+score+" move:"+bestMove);
         return bestMove;
     }
     this.scoreMove = function(move,grid,depth){
