@@ -71,6 +71,7 @@ function Ai() {
       var score = 0;
       var i;
       var j;
+      var numEmpty = 0;
       for(i = 0; i<4; i++){
 	for(j = 0; j<4; j++){
 	  if(grid.cells[i][j]!=null){
@@ -92,10 +93,12 @@ function Ai() {
 	      exp = (newExp > exp) ? newExp : exp;
 	    }
 	    score += Math.round(Math.pow(grid.cells[i][j].value,exp));
+	  }else{
+	    numEmpty++;
 	  }
 	}
       }
-      return score;
+      return Math.round(Math.pow(score,1+numEmpty/100));
     }
     this.getExp = function(cell1,cell2,depth){
 	var exp = 1.05 - depth/100;
