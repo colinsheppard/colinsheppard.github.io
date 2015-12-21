@@ -64,7 +64,7 @@ function Ai() {
 	  }
 	}
       }
-      console.log("move: "+move+" valid? "+validMove+" depth: "+depth+" score: "+score);
+      /*console.log("move: "+move+" valid? "+validMove+" depth: "+depth+" score: "+score);*/
       return score;
     }
     this.getScore = function(grid,depth){
