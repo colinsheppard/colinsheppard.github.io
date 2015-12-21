@@ -25,7 +25,7 @@ function Ai() {
         //              Method returns true if you can move to that direction, false otherwise.
 	
       /*alert(((grid.cells[0][0]==null)?"empty":grid.cells[0][0].value));*/
-	var score = getScore(grid);
+	var score = this.getScore(grid);
 	var bestMove = 0;
 	for(i = 0; i < 4; i++){ 
 	  var newscore = this.scoreMove(i,newgrid,depth+1);
