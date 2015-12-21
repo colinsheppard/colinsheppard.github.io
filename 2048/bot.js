@@ -72,7 +72,7 @@ function Ai() {
       var i;
       var j;
       var numEmpty = 0;
-      var maxCell = grid.cells[0][0];
+      var maxCell = null;
       for(i = 0; i<4; i++){
 	for(j = 0; j<4; j++){
 	  if(grid.cells[i][j]!=null){
@@ -94,6 +94,7 @@ function Ai() {
 	      exp = (newExp > exp) ? newExp : exp;
 	    }
 	    score += Math.round(Math.pow(grid.cells[i][j].value,exp));
+	    if(maxCell==null)maxCell = grid.cells[i][j];
 	    if(grid.cells[i][j].value > maxCell.value)maxCell = grid.cells[i][j];
 	  }else{
 	    numEmpty++;
