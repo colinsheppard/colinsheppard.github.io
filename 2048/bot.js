@@ -105,11 +105,7 @@ function Ai() {
 	  }
 	}
       }
-      /*var expBonus = numEmpty/150;*/
-      /*if(maxCell.x + maxCell.y == 0 || maxCell.x + maxCell.y == 6 || (maxCell.x + maxCell.y == 3 && (maxCell.x == 0 || maxCell.y == 0))){*/
-      /*expBonus += 0.2;*/
-      /*}*/
-      return Math.round(Math.pow(score,1.1 + numEmpty/30 - depth/100));
+      return Math.round(Math.pow(score,1.1 + numEmpty/15 - depth/100));
     }
     this.getNeighborBonus = function(cell1,cell2,depth){
 	var bonus = 1.4;
@@ -122,6 +118,6 @@ function Ai() {
 	    bonus = 1.8;
 	  }
 	}
-	return bonus - 2*depth/100;
+	return bonus - depth/100;
     }
 }
