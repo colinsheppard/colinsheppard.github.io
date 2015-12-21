@@ -48,7 +48,6 @@ function Ai() {
         return bestMove;
     }
     this.scoreMove = function(move,grid,depth){
-      console.log("move: "+move+" depth: "+depth);
       var newgrid = grid.copy();
       var validMove = newgrid.move(move);
       var score = this.getScore(newgrid);
@@ -58,6 +57,7 @@ function Ai() {
 	  if(newscore>score)score = newscore;
 	}
       }
+      console.log("move: "+move+" depth: "+depth+" score: "+score);
       return score;
     }
     this.getScore = function(grid){
@@ -65,7 +65,7 @@ function Ai() {
       for(i = 0; i<4; i++){
 	for(j = 0; j<4; j++){
 	  if(grid.cells[i][j]!=null){
-	    score += Math.round(Math.pow(grid.cells[i][j],1.25));
+	    score += Math.round(Math.pow(grid.cells[i][j].value,1.25));
 	  }
 	}
       }
