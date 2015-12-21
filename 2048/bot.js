@@ -38,7 +38,7 @@ function Ai() {
 	if(bestMove == -1){
 	  for(i = 0; i < 4; i++){ 
 	    var newgrid = grid.copy();
-	    var validMove = newgrid.move(move);
+	    var validMove = newgrid.move(i);
 	    if(validMove){
 	      bestMove = i;
 	    }
