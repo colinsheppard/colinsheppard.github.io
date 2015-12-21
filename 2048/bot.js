@@ -108,14 +108,14 @@ function Ai() {
       return Math.round(Math.pow(score,1 + expBonus - 2*depth/100));
     }
     this.getNeighborBonus = function(cell1,cell2,depth){
-	var bonus = 1.1;
+	var bonus = 1.2;
 	if(cell2!=null){
 	  if(Math.round(cell1.value / 4)  == cell2.value){
-	    bonus = 1.15;
-	  }else if(Math.round(cell1.value / 2) == cell2.value){
-	    bonus = 1.2;
-	  }else if(cell1.value == cell2.value){
 	    bonus = 1.3;
+	  }else if(Math.round(cell1.value / 2) == cell2.value){
+	    bonus = 1.4;
+	  }else if(cell1.value == cell2.value){
+	    bonus = 1.6;
 	  }
 	}
 	return bonus - 2*depth/100;
